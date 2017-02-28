@@ -49,7 +49,9 @@ public class MainActivity extends AppCompatActivity implements UniversalVideoVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        
+        //开始就使用竖屏,避免一开始就横屏导致的高度不对
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mVideoLayout = findViewById(R.id.video_layout);
         mBottomLayout = findViewById(R.id.bottom_layout);
         mVideoView = (UniversalVideoView) findViewById(R.id.videoView);
@@ -155,6 +157,8 @@ public class MainActivity extends AppCompatActivity implements UniversalVideoVie
                 supportActionBar.show();
             } else {
                 supportActionBar.hide();
+                //取消actionBar退出动画，否则会造成切换的闪屏现象，其实是actionbar的退出动画造成的，
+                ((WindowDecorActionBar)supportActionBar).setShowHideAnimationEnabled(false);
             }
         }
     }
